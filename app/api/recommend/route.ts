@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
-    const response = await fetch('https://pet-server.fly.dev/recommend', {
+    const response = await fetch('http://localhost:8000/recommend', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

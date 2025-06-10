@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { useState } from "react"
 
 export interface MatchResultCardProps {
   id: string
@@ -7,11 +8,14 @@ export interface MatchResultCardProps {
   lat: number
   lon: number
   name: string
+  personality: string,
   score: number
   // You can add more fields as needed
 }
 
-export default function MatchResultCard({ id, image, lat, lon, name, score }: MatchResultCardProps) {
+export default function MatchResultCard({ id, image, lat, lon, name, personality, score }: MatchResultCardProps) {
+  const tags = personality.split(",").map((tag, _) => tag.trim())
+  console.log(personality)
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -36,9 +40,9 @@ export default function MatchResultCard({ id, image, lat, lon, name, score }: Ma
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full text-xs font-medium">귀여움</span>
-          <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full text-xs font-medium">사교적</span>
-          <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full text-xs font-medium">영리함</span>
+          {tags.map((personality, _) => {
+            return <span className="bg-pink-50 text-pink-600 px-3 py-1 rounded-full text-xs font-medium">{personality}</span>
+          })}
         </div>
 
         <p className="text-gray-600 text-xs leading-relaxed">
